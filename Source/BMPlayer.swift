@@ -16,6 +16,7 @@ public protocol BMPlayerDelegate : class {
     func bmPlayer(player: BMPlayer ,loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval)
     func bmPlayer(player: BMPlayer ,playTimeDidChange currentTime : TimeInterval, totalTime: TimeInterval)
     func bmPlayer(player: BMPlayer ,playerIsPlaying playing: Bool)
+    func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool)
 }
 
 /**
@@ -345,6 +346,7 @@ open class BMPlayer: UIView {
     
     @objc fileprivate func onOrientationChanged() {
         self.updateUI(isFullScreen)
+        delegate?.bmPlayer(player: self, playerOrientChanged: isFullScreen)
     }
     
     @objc fileprivate func fullScreenButtonPressed() {
